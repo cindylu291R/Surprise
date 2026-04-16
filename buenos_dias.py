@@ -108,7 +108,7 @@ if os.path.exists("Cuentame.mp3"):
     st.markdown("#### 🎵 <small>Dale play para tu sorpresa:</small>", unsafe_allow_html=True)
     st.audio("Cuentame.mp3", format="audio/mp3")
 
-st.write("Intento programar, lo hice con ayuda de la IA ¡este proyecto va para ti!.. pero seguro aprenderé más! 🙃")
+st.write("Intento programar, lo hice con ayuda de la IA ¡Este proyecto va para ti!.. pero seguro aprenderé más! 🙃")
 st.write("---")
 
 # Slider
