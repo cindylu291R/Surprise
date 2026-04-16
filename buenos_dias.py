@@ -102,13 +102,13 @@ def typewriter(text, speed=0.10):
     container.markdown(full_text)
 
 # --- CONTENIDO PRINCIPAL ---
-st.title("¡Buenos días! ☀️")
+st.title("¡Buenos días! ☀️😊")
 
 if os.path.exists("cuentame.mp3"):
     st.markdown("#### 🎵 <small>Dale play para tu sorpresa:</small>", unsafe_allow_html=True)
     st.audio("cuentame.mp3", format="audio/mp3")
 
-st.write("Intento programar, ¡este proyecto va para ti!..")
+st.write("Intento programar, lo hice con ayuda de la IA ¡este proyecto va para ti!.. pero seguro aprenderé más! 🙃")
 st.write("---")
 
 # Slider
