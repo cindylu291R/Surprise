@@ -133,13 +133,9 @@ if opcion != "Selecciona una opción...":
     print_log_visual("Procesando nivel de cariño...", "SUCCESS")
     if opcion == "Porque estás loquita": st.success("¡Bingo! Una locura de las buenas. 🤪")
     elif opcion == "Porque soy increíble": st.info("Exacto. Eres fenomenal. ✨")
-    elif opcion == "Porque me extrañas": 
-        # Aquí va el toque especial
-        st.write("### ¿Extrañarte? Nooo... para nada... 🙄")
-        time.sleep(1.5) # Pausa dramática
-        st.write("### (Bueno, ya... en el fondo sabes que sí, y mucho). 🥺❤️")
-        st.toast("Me atrapaste... 🫣")
-        
+    elif opcion == "Porque me extrañas": st.write("Bueno... en el fondo sabes que sí, y mucho. 🥺❤️")
+    st.toast("Me atrapaste... 🫣")
+    
 # Manifiesto
 st.write("---")
 with st.expander("HAZ CLIC PARA EL MANIFIESTO DE MI CORAZÓN 💌"):
