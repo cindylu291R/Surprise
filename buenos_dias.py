@@ -160,7 +160,7 @@ st.write("---")
 col_b1, col_b2 = st.columns([1, 1])
 with col_b1:
     if st.button("¡Enviar 3 besos de golpe! 💋💋💋"):
-        st.session_state.contador += 3
+        st.session_state.contador += 1
         registrar_en_nube("BESOS", f"Total: {st.session_state.contador}")
         print_log_visual("Procesando nivel de cariño...", "SUCCESS")
         lanzar_efecto("besos")
