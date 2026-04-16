@@ -145,7 +145,13 @@ if opcion != "Selecciona una opción...":
 # Manifiesto
 st.write("---")
 with st.expander("HAZ CLIC PARA EL MANIFIESTO DE MI CORAZÓN 💌"):
-    mensaje = """### ¡Holitas! Una bonita mañana al despertar... ☀️\nQue Dios te proteja... te dejo un abrazo de esos que apapachan el alma. ¡Te quiero mucho! ❤️😘😘"""
+    mensaje = """### ¡Holitas! Una bonita mañana al despertar... ☀️\nQue Dios te proteja y te bendiga. Hoy deseo que te recargues de toda esa energía carismática y auténtica; esa misma que transmites a través de tus ojos y que llevas contigo a donde vas. 
+
+Que hoy el cafelito te sepa delicioso y que tu sonrisa sea quien ilumine el día. Y no importa que esté a kilómetros, ten por seguro que una parte de mi corazón está contigo deseándote todo lo hermoso. 😊
+
+**Desayuna bien.** Estaré dormida cuando lo leas, quizás te robe una sonrisa, pero te dejo un abrazo de esos que 'apapachan' el alma. ¡Así que vamos con toda hoy! 😋. 
+
+¡Te quiero mucho Ches! ❤️😘😘"""
     if not st.session_state.mensaje_revelado:
         if st.button("Leer mensaje poco a poco... ✨"):
             registrar_en_nube("MANIFIESTO", "Revelado")
