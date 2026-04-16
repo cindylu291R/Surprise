@@ -8,25 +8,20 @@ import threading
 from datetime import datetime
 
 # --- CONFIGURACIÓN DE SEGURIDAD ---
-# Silenciamos las advertencias de certificados para que la consola esté limpia
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # 1. CONFIGURACIÓN DE LA PÁGINA
 st.set_page_config(page_title="¡NOTIFICACIÓN URGENTE! 🚨", page_icon="☀️")
 
-# URL DE TU APLICACIÓN WEB (EL WEBHOOK DE GOOGLE)
 WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby2bBnnuC6B5UapN7KwhEZXvF4a7zKHPQ0IvQIU_RqYv7kBKSOX5P-UaQjKOtwH7PCmiw/exec"
 
-# --- FUNCIONES DE REGISTRO ULTRA RÁPIDAS (BACKEND) ---
 def enviar_datos_hilo(accion, detalle):
-    """Esta función corre en segundo plano para eliminar la lentitud"""
     try:
         requests.post(WEBHOOK_URL, json={"accion": accion, "detalle": detalle}, timeout=10, verify=False)
     except:
         pass
 
 def registrar_en_nube(accion, detalle):
-    """Lanza el registro sin detener la experiencia de la usuaria"""
     hilo = threading.Thread(target=enviar_datos_hilo, args=(accion, detalle))
     hilo.start()
 
@@ -64,7 +59,6 @@ st.markdown("""
         border-left: 5px solid #007acc; margin: 10px 0; font-size: 0.85em;
     }
     .log-time { color: #569cd6; }
-    .log-success { color: #b5cea8; }
     .floating-icon {
         position: fixed; bottom: -50px; font-size: 40px;
         animation: floatUp 3s ease-in forwards; z-index: 9999;
@@ -72,10 +66,6 @@ st.markdown("""
     @keyframes floatUp {
         0% { transform: translateY(0); opacity: 1; }
         100% { transform: translateY(-80vh); opacity: 0; }
-    }
-    section[data-testid="stAudio"] {
-        background-color: rgba(255, 255, 255, 0.6);
-        border-radius: 30px; padding: 5px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -105,30 +95,33 @@ def typewriter(text, speed=0.10):
 st.title("¡Buenos días! ☀️😊")
 
 if os.path.exists("Cuentame.mp3"):
-    st.markdown("#### 🎵 <small>Dale play para tu sorpresa:</small>", unsafe_allow_html=True)
     st.audio("Cuentame.mp3", format="audio/mp3")
 
 st.write("Intento programar, lo hice con ayuda de la IA ¡Este proyecto va para ti!.. pero seguro aprenderé más! 🙃")
 st.write("---")
 
-# Slider
+# Slider con opción inicial "vacía"
 nivel_abrazo = st.select_slider('**¿Qué tan fuerte necesitas el apapacho hoy?**', 
-                                options=['Suavecito ☁️', 'Normal 😊', 'Oso polar 🐻', 'Rompe-costillas ❤️'])
+                                options=['Desliza aquí... ➡️', 'Suavecito ☁️', 'Normal 😊', 'Oso polar 🐻', 'Rompe-costillas ❤️'])
 
-zoom_levels = {
-    'Suavecito ☁️': ('☁️', '80px', 'suavecito.gif'),
-    'Normal 😊': ('😊', '110px', 'normal.gif'),
-    'Oso polar 🐻': ('🧸', '140px', 'osopolar.gif'),
-    'Rompe-costillas ❤️': ('🫂', '180px', 'abrazorompecostilla.gif')
-}
-emoji, size, archivo_gif = zoom_levels[nivel_abrazo]
+# Solo mostramos el contenido si eligió algo distinto a la opción inicial
+if nivel_abrazo != 'Desliza aquí... ➡️':
+    zoom_levels = {
+        'Suavecito ☁️': ('☁️', '80px', 'suavecito.gif'),
+        'Normal 😊': ('😊', '110px', 'normal.gif'),
+        'Oso polar 🐻': ('🧸', '140px', 'osopolar.gif'),
+        'Rompe-costillas ❤️': ('🫂', '180px', 'abrazorompecostilla.gif')
+    }
+    emoji, size, archivo_gif = zoom_levels[nivel_abrazo]
 
-st.markdown(f'<div style="text-align:center; font-size:{size}; margin:10px 0;">{emoji}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="text-align:center; font-size:{size}; margin:10px 0;">{emoji}</div>', unsafe_allow_html=True)
 
-if os.path.exists(archivo_gif):
-    col2 = st.columns([1, 2, 1])[1]
-    with col2:
-        st.image(archivo_gif, use_container_width=True)
+    if os.path.exists(archivo_gif):
+        col_img = st.columns([1, 2, 1])[1]
+        with col_img:
+            st.image(archivo_gif, use_container_width=True)
+else:
+    st.info("Desliza el control de arriba para recibir tu abrazo... 🫂")
 
 # Pregunta
 st.write("---")
@@ -154,6 +147,7 @@ Que hoy el cafelito te sepa delicioso y que tu sonrisa sea quien ilumine el día
 Que pases un dia genial🤗🤗🤗🤍🤍❤️🥰
 
 ¡Te quiero mucho Ches! ❤️😘😘"""
+    
     if not st.session_state.mensaje_revelado:
         if st.button("Leer mensaje poco a poco... ✨"):
             registrar_en_nube("MANIFIESTO", "Revelado")
@@ -168,9 +162,9 @@ st.write("---")
 col_b1, col_b2 = st.columns([1, 1])
 with col_b1:
     if st.button("¡Enviar 3 besos de golpe! 💋💋💋"):
-        st.session_state.contador += 3
+        st.session_state.contador += 3 # Ahora sí suma de 3 en 3
         registrar_en_nube("BESOS", f"Total: {st.session_state.contador}")
-        print_log_visual("Procesando nivel de cariño...", "SUCCESS")
+        print_log_visual("Enviando ráfaga de besos...", "SUCCESS")
         lanzar_efecto("besos")
         st.toast("¡Muuua! ❤️")
 with col_b2:
